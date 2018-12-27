@@ -1,16 +1,22 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
+const polyfills = [
+	"./src/polyfills/array-includes.js",
+	"./src/polyfills/Symbol.js",
+	"./src/polyfills/setTimeout.js"
+]
+
 module.exports = {
 	entry: {
 		browser: ["./src/index.js"],
 		duktapeHTML: [
-			"./src/polyfills.js",
+			...polyfills,
 			"./src/index.duktape.string.js",
 			"./src/polyfills/eventLoop.js"
 		],
 		duktapeJSON: [
-			"./src/polyfills.js",
+			...polyfills,
 			"./src/index.duktape.json.js",
 			"./src/polyfills/eventLoop.js"
 		]
