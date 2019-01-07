@@ -1,4 +1,4 @@
-# Duktape + Prect prototype
+# Duktape + Preact prototype
 
 Prototype build configuration which uses Webpack and Babel to transpile Preact into ES5, so that it runs on Duktape.js.
 
