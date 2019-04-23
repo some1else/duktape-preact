@@ -2,7 +2,8 @@
 
 rm -rf dist/*
 
-node node_modules/webpack/bin/webpack.js --mode development 
+# node node_modules/webpack/bin/webpack.js --mode development 
+node node_modules/webpack/bin/webpack.js --mode production 
 
 ./bin/duk dist/duktapeHTML.js > dist/render.html
 ./bin/duk dist/duktapeJSON.js > dist/render.json
