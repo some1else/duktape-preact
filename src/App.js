@@ -4,38 +4,39 @@ import { h, Component } from "preact"
 const Greeting = ({ label }) => (
 	<div class="greeting">
 		<h1>Hello</h1>
-		<p>{label}</p>
+		<p>{label} component</p>
 	</div>
 )
 
 class App extends Component {
 	state = {
-		count: 0,
+		events: [],
 	}
 
-	handleIncrement = e => {
-		const { count } = this.state
-		this.setState({ count: count + 1 })
+	handleEvent = e => {
+		const { events } = this.state
+		this.setState({ events: [...events, e] })
 	}
 
 	componentWillMount() {
-		this.handleIncrement()
+		this.handleEvent("will mount")
 		setTimeout(() => {
-			this.handleIncrement()
+			this.handleEvent("1000ms timeout")
 		}, 1000)
 	}
 
 	componentDidMount() {
-		console.log("component did mount")
-		this.handleIncrement()
+		this.handleEvent("did mount")
 	}
 
 	render() {
-		const { count } = this.state
+		const { events } = this.state
 		return (
 			<div class="App">
-				<Greeting label={`world ${count}`} />
-				<button onClick={this.handleIncrement}>Increment</button>
+				<Greeting label={`world`} />
+				<h2>Events</h2>
+				<p>{events.join(", ")}</p>
+				<button onClick={e => this.handleEvent("click")}>Emit event</button>
 			</div>
 		)
 	}
