@@ -1,25 +1,30 @@
-if (typeof setTimeout !== 'function') {
+if (typeof window !== "object") {
+	var window
+}
 
-	let polyfillEventLoop
-	let window
+if (typeof setTimeout !== "function") {
+	function initTimeoutPolyfill() {
+		var timers = []
 
-	(function () {
-		let timers = []
+		window = Function("return this")()
 
-		window = Function('return this')()
-
-		window.setTimeout = (func, timeout) => {
+		window.setTimeout = (func, delay) => {
+			const index = timers.length
 			timers = [...timers, func]
+			return index
 		}
 
-		window.clearTimeout = () => {}
+		window.clearTimeout = index => {
+			timers.splice(index, 1)
+		}
 
-		polyfillEventLoop = () => {
+		window.polyfillEventLoop = () => {
 			while (timers.length > 0) {
-				const func = timers.shift()                
+				const func = timers.shift()
 				func()
 			}
 		}
-	})()
+	}
 
+	initTimeoutPolyfill()
 }
