@@ -4,7 +4,7 @@ const path = require("path")
 const polyfills = [
 	"./src/polyfills/array-includes.js",
 	"./src/polyfills/Symbol.js",
-	"./src/polyfills/setTimeout.js"
+	"./src/polyfills/setTimeout.js",
 ]
 
 module.exports = {
@@ -13,29 +13,29 @@ module.exports = {
 		duktapeHTML: [
 			...polyfills,
 			"./src/index.duktape.string.js",
-			"./src/polyfills/eventLoop.js"
+			"./src/polyfills/eventLoop.js",
 		],
 		duktapeJSON: [
 			...polyfills,
 			"./src/index.duktape.json.js",
-			"./src/polyfills/eventLoop.js"
-		]
+			"./src/polyfills/eventLoop.js",
+		],
 	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				use: {
-					loader: "babel-loader"
-				}
+					loader: "babel-loader",
+				},
 			},
-			{ test: /\.html$/, use: "html-loader" }
-		]
+			{ test: /\.html$/, use: "html-loader" },
+		],
 	},
 	plugins: [
 		new HtmlWebPackPlugin({
 			template: "./src/index.html",
-			chunks: ["browser"]
-		})
-	]
+			chunks: ["browser"],
+		}),
+	],
 }
