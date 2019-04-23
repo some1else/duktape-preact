@@ -1,4 +1,5 @@
 import { h, Component } from "preact"
+// import yoga, { Node } from "yoga-layout"
 
 const Greeting = ({ label }) => (
 	<div class="greeting">
@@ -9,12 +10,24 @@ const Greeting = ({ label }) => (
 
 class App extends Component {
 	state = {
-		count: 0
+		count: 0,
 	}
 
 	handleIncrement = e => {
 		const { count } = this.state
 		this.setState({ count: count + 1 })
+	}
+
+	componentWillMount() {
+		this.handleIncrement()
+		setTimeout(() => {
+			this.handleIncrement()
+		}, 1000)
+	}
+
+	componentDidMount() {
+		console.log("component did mount")
+		this.handleIncrement()
 	}
 
 	render() {
