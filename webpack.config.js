@@ -2,9 +2,10 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
 const polyfills = [
-	"./src/polyfills/array-includes.js",
-	"./src/polyfills/Symbol.js",
-	"./src/polyfills/setTimeout.js",
+  "./src/polyfills/setTimeout.js",
+  "./src/polyfills/es6-promise.js",
+  "./src/polyfills/array-includes.js",
+  "./src/polyfills/Symbol.js",
 ]
 
 module.exports = {
@@ -38,4 +39,14 @@ module.exports = {
       chunks: ["browser"],
     }),
   ],
+  resolve: {
+    alias: {
+      react: "preact/compat",
+      "react-dom": "preact/compat",
+      // Not necessary unless you consume a module using `createClass`
+      "create-react-class": "preact-compat/lib/create-react-class",
+      // Not necessary unless you consume a module requiring `react-dom-factories`
+      "react-dom-factories": "preact-compat/lib/react-dom-factories",
+    },
+  },
 }
